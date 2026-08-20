@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "airtuk"
+version = "0.1.0"
+description = "ML tutorials for turbulence research"
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "jupyterlab",
+    "ipykernel"
+]
+
+[project.scripts]
+airtuk = "airtuk.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+airtuk = [
+    "tutorials/**/*.ipynb",
+    "tutorials/**/*.py",
+    "tutorials/**/*.csv",
+    "tutorials/**/*.json",
+    "tutorials/**/*.txt",
+]

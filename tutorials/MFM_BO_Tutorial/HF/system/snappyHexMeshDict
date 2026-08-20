@@ -1,0 +1,322 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+castellatedMesh true;
+snap            true;
+addLayers       true;
+
+
+geometry
+{
+    hemisphere.stl
+    {
+        type triSurfaceMesh;
+        name hemisphere;
+    }
+    refinementBox
+    {
+        type searchableBox;
+        min (-0.3 -0.35 0);
+        max (0.6 0.35 0.13);
+    }
+    plate
+    {
+        type searchablePlane;
+        planeType pointAndNormal;
+        pointAndNormalDict 
+	{
+		point  (0 0 0);
+		normal (0 0 1);
+	}
+
+    }
+}
+
+castellatedMeshControls
+{
+    maxLocalCells 100000;
+    maxGlobalCells 20000000;
+    minRefinementCells 10;
+    maxLoadUnbalance 0.10;
+    nCellsBetweenLevels 5;
+
+    features
+    (
+        {
+            file "hemisphere.eMesh";
+            level 0;
+        }
+    );
+
+    refinementSurfaces
+    {
+        hemisphere
+        {
+            // Surface-wise min and max refinement level
+            level (3 3);
+
+            patchInfo
+            {
+                type wall;
+            }
+        }
+       
+	plate
+        {
+		level (3 3);
+        }
+
+    }
+
+    resolveFeatureAngle 30;
+    planarAngle 30;
+
+    refinementRegions
+    {
+        refinementBox
+        {
+            mode inside;   
+            //levels ((1e15 1));
+            levels ((1e15 3));
+            //levels ((1.0 4));
+        }
+
+    }
+
+    locationInMesh (0.9 0.3 0.3);
+
+    allowFreeStandingZoneFaces true;
+}
+
+snapControls
+{
+    nSmoothPatch 3;
+    tolerance 2.0;
+    nSolveIter 30;
+    nRelaxIter 5;
+
+        // Number of feature edge snapping iterations.
+        // Leave out altogether to disable.
+        nFeatureSnapIter 10;
+
+        // Detect (geometric only) features by sampling the surface
+        // (default=false).
+        implicitFeatureSnap false;
+
+        // Use castellatedMeshControls::features (default = true)
+        explicitFeatureSnap true;
+
+        // Detect features between multiple surfaces
+        // (only for explicitFeatureSnap, default = false)
+        multiRegionFeatureSnap false;
+}
+
+addLayersControls
+{
+    relativeSizes true;
+
+    layers
+    {
+        hemisphere
+        {
+            nSurfaceLayers 2;
+            // Per patch layer data
+            expansionRatio      1.2;
+            finalLayerThickness 0.8;
+            minThickness        0.01;
+        }
+        plate
+        {
+            nSurfaceLayers 2;
+            // Per patch layer data
+            expansionRatio      1.2;
+            finalLayerThickness 0.8;
+            minThickness        0.01;
+        }
+    }
+
+    expansionRatio 1.2;
+    finalLayerThickness 0.8;
+    minThickness 0.01;
+    nGrow 0;
+
+        featureAngle 30;
+        //featureAngle 130;		//it was 130 originally,
+        //featureAngle 180;
+        //featureAngle 270;
+
+        // Stop layer growth on highly warped cells
+        maxFaceThicknessRatio 0.5;
+
+    // Patch displacement
+
+        // Number of smoothing iterations of surface normals
+        nSmoothSurfaceNormals 10;
+
+        // Smooth layer thickness over surface patches
+        nSmoothThickness 10;
+
+    // Medial axis analysis
+
+        // Angle used to pick up medial axis points
+        // Note: changed(corrected) w.r.t 17x! 90 degrees corresponds to 130
+        // in 17x.
+        minMedialAxisAngle 90;
+        minMedianAxisAngle 90;
+
+        // Reduce layer growth where ratio thickness to medial
+        // distance is large
+        maxThicknessToMedialRatio 0.3;
+
+        // Number of smoothing iterations of interior mesh movement direction
+        nSmoothNormals 5;
+
+        // Optional: limit the number of steps walking away from the surface.
+        // Default is unlimited.
+        //nMedialAxisIter 10;
+
+        // Optional: smooth displacement after medial axis determination.
+        // default is 0.
+        //nSmoothDisplacement 90;
+
+        // (wip)Optional: do not extrude a point if none of the surrounding points is
+        // not extruded. Default is false.
+        //detectExtrusionIsland true;
+
+    // Mesh shrinking
+
+        // Optional: at non-patched sides allow mesh to slip if extrusion
+        // direction makes angle larger than slipFeatureAngle. Default is
+        // 0.5*featureAngle.
+        slipFeatureAngle 30;
+
+        // Maximum number of snapping relaxation iterations. Should stop
+        // before upon reaching a correct mesh.
+        nRelaxIter 50;
+
+        // Create buffer region for new layer terminations
+        nBufferCellsNoExtrude 0;
+
+        // Overall max number of layer addition iterations. The mesher will
+        // exit if it reaches this number of iterations; possibly with an
+        // illegal mesh.
+        nLayerIter 50;
+
+        // Max number of iterations after which relaxed meshQuality controls
+        // get used. Up to nRelaxedIter it uses the settings in
+        // meshQualityControls,
+        // after nRelaxedIter it uses the values in
+        // meshQualityControls::relaxed.
+        nRelaxedIter 50;
+
+        // Additional reporting: if there are just a few faces where there
+        // are mesh errors (after adding the layers) print their face centres.
+        // This helps in tracking down problematic mesh areas.
+        //additionalReporting true;
+}
+
+meshQualityControls
+{
+//- Maximum non-orthogonality allowed. Set to 180 to disable.
+maxNonOrtho 65;
+
+//- Max skewness allowed. Set to <0 to disable.
+maxBoundarySkewness 20;
+maxInternalSkewness 4;
+
+//- Max concaveness allowed. Is angle (in degrees) below which concavity
+//  is allowed. 0 is straight face, <0 would be convex face.
+//  Set to 180 to disable.
+maxConcave 80;
+
+//- Minimum pyramid volume. Is absolute volume of cell pyramid.
+//  Set to a sensible fraction of the smallest cell volume expected.
+//  Set to very negative number (e.g. -1E30) to disable.
+minVol 1e-13;
+
+//- Minimum quality of the tet formed by the face-centre
+//  and variable base point minimum decomposition triangles and
+//  the cell centre. This has to be a positive number for tracking
+//  to work. Set to very negative number (e.g. -1E30) to
+//  disable.
+//     <0 = inside out tet,
+//      0 = flat tet
+//      1 = regular tet
+//minTetQuality 1e-15;
+minTetQuality -1e30;		//ok surface mesh
+//minTetQuality 0;
+//minTetQuality 1;		//ok surface mesh, does not do inflation layer	
+
+//- Minimum face area. Set to <0 to disable.
+minArea -1;
+
+//- Minimum face twist. Set to <-1 to disable. dot product of face normal
+// and face centre triangles normal
+minTwist 0.02;
+
+//- Minimum normalised cell determinant. This is the determinant of all
+//  the areas of internal faces. It is a measure of how much of the
+//  outside area of the cell is to other cells. The idea is that if all
+//  outside faces of the cell are 'floating' (zeroGradient) the
+//  'fixedness' of the cell is determined by the area of the internal faces.
+//  1 = hex, <= 0 = folded or flattened illegal cell
+minDeterminant 0.001;
+
+//- Relative position of face in relation to cell centres (0.5 for orthogonal
+//  mesh) (0 -> 0.5)
+minFaceWeight 0.05;
+//minFaceWeight 0.02;
+
+//- Volume ratio of neighbouring cells (0 -> 1)
+minVolRatio 0.01;
+
+//- Per triangle normal compared to average normal. Like face twist
+//  but now per (face-centre decomposition) triangle. Must be >0 for Fluent
+//  compatibility
+minTriangleTwist -1;
+
+//- if >0 : preserve cells with all points on the surface if the
+//  resulting volume after snapping (by approximation) is larger than
+//  minVolCollapseRatio times old volume (i.e. not collapsed to flat cell).
+//  If <0 : delete always.
+//minVolCollapseRatio 0.1;
+
+    relaxed
+    {
+        maxNonOrtho 75;
+    }
+
+    // Advanced
+
+        // Number of error distribution iterations
+        nSmoothScale 4;
+        // amount to scale back displacement at error points
+        errorReduction 0.75;
+}
+
+debug 0;
+writeFlags
+(
+    scalarLevels    // write volScalarField with cellLevel for postprocessing
+    layerSets       // write cellSets, faceSets of faces in layer
+    layerFields     // write volScalarField for layer coverage
+);
+mergeTolerance 1e-6;
+
+
+
+// ************************************************************************* //
