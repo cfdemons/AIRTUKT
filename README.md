@@ -130,7 +130,7 @@ AIRTUK uses two separate Python environments because different tutorials require
                       │
              ┌────────┴────────┐
              │                 │
-             ▼                  ▼
+             ▼                 ▼
      AIRTUK environment   AIRTUK2 environment
              │                 │
        Kernel: airtuk     Kernel: airtuk2
