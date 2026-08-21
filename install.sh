@@ -79,12 +79,6 @@ echo "Upgrading pip..."
 python -m pip install --upgrade pip
 
 # --------------------------------------------------
-# 5. Clean previous AIRTUK installtion (if any)
-# --------------------------------------------------
-python -m pip uninstall -y airtuk
-rm -rf src/airtuk.egg-info
-
-# --------------------------------------------------
 # 6. Install AIRTUK
 # --------------------------------------------------
 echo ""
