@@ -1,17 +1,36 @@
+#!/usr/bin/env bash
+
+set -e
+
+VENV_DIR=".buildenv"
+PYTHON="$VENV_DIR/bin/python"
+AIRTUK="$VENV_DIR/bin/airtuk"
+
 # --------------------------------------------------
-# 1. Activate virtual environment
+# 1. Check AIRTUK environment
+# --------------------------------------------------
+
+if [ ! -x "$PYTHON" ] || [ ! -x "$AIRTUK" ]; then
+    echo ""
+    echo "ERROR: AIRTUK environment was not found."
+    echo ""
+    echo "Please run:"
+    echo ""
+    echo "    ./install.sh"
+    echo ""
+    exit 1
+fi
+
+# --------------------------------------------------
+# 2. Show Python version
 # --------------------------------------------------
 
 echo ""
-echo "Activating virtual environment..."
-
-source ".buildenv/bin/activate"
-
-echo "Active Python:"
-python --version
+echo "AIRTUK Python:"
+"$PYTHON" --version
 
 # --------------------------------------------------
-# 2. Launch Jupyter Notebook
+# 3. Launch AIRTUK
 # --------------------------------------------------
 
 echo ""
@@ -20,4 +39,4 @@ echo "       Launching AIRTUK"
 echo "======================================"
 echo ""
 
-airtuk notebook
+exec "$AIRTUK" notebook
