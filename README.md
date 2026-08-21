@@ -6,17 +6,9 @@ AIRTUK is a collection of tutorials demonstrating the application of machine lea
 
 AIRTUK requires **Python 3.10**.
 
-Before starting, make sure that Python 3.10 is installed and available as:
+You do **not** need to install Python 3.10 manually. The AIRTUK installation script uses [`uv`](https://docs.astral.sh/uv/) to automatically install and manage the required Python 3.10 interpreter.
 
-```bash
-python3.10
-```
-
-You can check this with:
-
-```bash
-python3.10 --version
-```
+The installation script will also install `uv` automatically if it is not already available on your system.
 
 ---
 
@@ -38,8 +30,7 @@ Run:
 chmod +x *.sh
 ```
 
-> **Note:** `chmod +x` option gives the scripts execute permission.
-
+> **Note:** `chmod +x` gives the scripts execute permission.
 
 ### 3. Install AIRTUK
 
@@ -51,27 +42,31 @@ Run:
 
 The installation script will automatically:
 
-1. Check that Python 3.10 is available.
-2. Create a Python virtual environment called `.buildenv`.
-3. Activate the virtual environment.
-4. Upgrade `pip`.
-5. Install the AIRTUK package.
-6. Create the AIRTUK and AIRTUK2 environments.
-7. Install the required Python packages for each environment.
-8. Register the AIRTUK and AIRTUK2 Jupyter kernels.
+1. Check whether `uv` is installed.
+2. Install `uv` if it is not available.
+3. Install Python 3.10 using `uv`.
+4. Create a Python 3.10 virtual environment called `.buildenv`.
+5. Install and upgrade the required Python packaging tools.
+6. Install the AIRTUK package into `.buildenv`.
+7. Run `airtuk install`.
+8. Create the AIRTUK and AIRTUK2 environments.
+9. Install the required Python packages for each environment.
+10. Register the AIRTUK and AIRTUK2 Jupyter kernels.
 
 The installation process is structured as follows:
 
 ```text
 ./install.sh
      │
-     ├── Check for Python 3.10
+     ├── Check for uv
+     │       │
+     │       └── Install uv if necessary
      │
-     ├── Create .buildenv
+     ├── Install Python 3.10 using uv
      │
-     ├── Activate .buildenv
+     ├── Create .buildenv using Python 3.10
      │
-     ├── Install AIRTUK
+     ├── Install AIRTUK into .buildenv
      │
      └── Run "airtuk install"
               │
@@ -88,10 +83,32 @@ The installation process is structured as follows:
                       └── Uses ~/.airtuk/envs/airtuk2/bin/python
 ```
 
-If Python 3.10 is not found, the installation will stop and display:
+### Python 3.10
+
+Python 3.10 is managed by `uv` and does not need to be installed system-wide.
+
+The Python interpreter used by AIRTUK is located inside the `.buildenv` environment:
 
 ```text
-ERROR: AIRTUK requires Python 3.10
+.buildenv/bin/python
+```
+
+You can verify the Python version after installation with:
+
+```bash
+.buildenv/bin/python --version
+```
+
+You should see:
+
+```text
+Python 3.10.x
+```
+
+You can also check the installed `uv` version with:
+
+```bash
+uv --version
 ```
 
 ---
@@ -104,19 +121,44 @@ After the installation has completed, launch the AIRTUK tutorials using:
 ./run_airtuk.sh
 ```
 
-This will launch Jupyter and provide access to the AIRTUK tutorials.
+The launch script uses the AIRTUK Python environment directly and does not require you to manually activate the virtual environment.
+
+It will launch Jupyter and provide access to the AIRTUK tutorials.
+
+The basic workflow is therefore:
+
+```text
+./install.sh
+      │
+      └── Install AIRTUK
+              │
+              ▼
+       ./run_airtuk.sh
+              │
+              ▼
+       Launch Jupyter
+```
 
 ---
 
 ## Uninstall AIRTUK
 
-to uninstall AIRTUK use:
+To uninstall AIRTUK, run:
 
 ```bash
 ./uninstall.sh
 ```
 
-This will unisntall both the dependencies and the enviroment.
+The uninstall script will remove:
+
+* The AIRTUK Python package.
+* AIRTUK build metadata.
+* The AIRTUK environments.
+* The `.buildenv` virtual environment.
+
+The `uv` installation and its managed Python versions are **not removed**, because they may be used by other projects on the system.
+
+If you want to remove `uv` or its managed Python versions separately, consult the `uv` documentation.
 
 ---
 
@@ -125,19 +167,19 @@ This will unisntall both the dependencies and the enviroment.
 AIRTUK uses two separate Python environments because different tutorials require different sets of dependencies.
 
 ```text
-                    AIRTUK
-                   Installer
-                      │
-             ┌────────┴────────┐
-             │                 │
-             ▼                 ▼
-     AIRTUK environment   AIRTUK2 environment
-             │                 │
-       Kernel: airtuk     Kernel: airtuk2
-             │                 │
-             │                 │
-     All tutorials       MFM_BO tutorial
-       except MFM_BO
+                         AIRTUK
+                        Installer
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+              ▼                         ▼
+      AIRTUK environment        AIRTUK2 environment
+              │                         │
+        Kernel: airtuk             Kernel: airtuk2
+              │                         │
+              │                         │
+       All tutorials             MFM_BO tutorial
+        except MFM_BO
 ```
 
 ### AIRTUK environment
@@ -227,11 +269,14 @@ chmod +x *.sh
 ./install.sh
 ```
 
+The installer will automatically install `uv`, obtain Python 3.10, create the AIRTUK environment, install the required packages, and register the Jupyter kernels.
+
 Once the installation is complete, launch the tutorials with:
 
 ```bash
 ./run_airtuk.sh
 ```
 
-That's it! AIRTUK will create the required environments and Jupyter kernels automatically.
+That's it! AIRTUK will manage the required Python 3.10 environment and create the required AIRTUK environments and Jupyter kernels automatically.
+
 
