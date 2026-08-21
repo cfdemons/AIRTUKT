@@ -116,7 +116,7 @@ to uninstall AIRTUK use:
 ./uninstall.sh
 ```
 
-This will unisntall both dependencies and the enviroment.
+This will unisntall both the dependencies and the enviroment.
 
 ---
 
