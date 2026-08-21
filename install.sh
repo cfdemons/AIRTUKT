@@ -7,12 +7,20 @@ echo "       AIRTUK Installation"
 echo "======================================"
 
 # --------------------------------------------------
-# 1. Clean previous AIRTUK installtion (if any)
+# Configuration
 # --------------------------------------------------
+
+VENV_DIR=".buildenv"
+PYTHON_VERSION="3.10"
+
+# --------------------------------------------------
+# 1. Clean previous AIRTUK installation (if any)
+# --------------------------------------------------
+
 echo ""
 echo "Checking for previous AIRTUK installation..."
 
-if [ -d ".buildenv" ] || \
+if [ -d "$VENV_DIR" ] || \
    [ -d "src/airtuk.egg-info" ] || \
    compgen -G "$HOME/.airtuk/envs/airtuk*" > /dev/null 2>&1; then
 
@@ -25,69 +33,102 @@ else
 fi
 
 # --------------------------------------------------
-# 2. Check for Python 3.10
+# 2. Install uv if necessary
 # --------------------------------------------------
-
-if ! command -v python3.10 >/dev/null 2>&1; then
-    echo ""
-    echo "ERROR: AIRTUK requires Python 3.10"
-    echo "Python 3.10 was not found on this system."
-    echo ""
-    exit 1
-fi
 
 echo ""
-echo "Python 3.10 found:"
-python3.10 --version
+echo "Checking for uv..."
+
+if command -v uv >/dev/null 2>&1; then
+    echo "uv found:"
+    uv --version
+else
+    echo "uv not found."
+    echo "Installing uv..."
+
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+
+    # uv normally installs here
+    export PATH="$HOME/.local/bin:$PATH"
+
+    if ! command -v uv >/dev/null 2>&1; then
+        echo ""
+        echo "ERROR: uv was installed but could not be found."
+        echo "Please add ~/.local/bin to your PATH and run this installer again."
+        exit 1
+    fi
+
+    echo "uv installed:"
+    uv --version
+fi
 
 # --------------------------------------------------
-# 3. Create virtual environment
+# 3. Install Python 3.10 using uv
 # --------------------------------------------------
 
-VENV_DIR=".buildenv"
+echo ""
+echo "Checking for Python $PYTHON_VERSION..."
+
+echo "Ensuring Python $PYTHON_VERSION is available through uv..."
+
+uv python install "$PYTHON_VERSION"
+
+echo ""
+echo "Python $PYTHON_VERSION:"
+uv run --python "$PYTHON_VERSION" python --version
+
+# --------------------------------------------------
+# 4. Create virtual environment
+# --------------------------------------------------
 
 if [ -d "$VENV_DIR" ]; then
     echo ""
     echo "Virtual environment '$VENV_DIR' already exists."
 else
     echo ""
-    echo "Creating virtual environment '$VENV_DIR'..."
-    python3.10 -m venv "$VENV_DIR"
+    echo "Creating virtual environment '$VENV_DIR' with Python $PYTHON_VERSION..."
+
+    uv venv "$VENV_DIR" --python "$PYTHON_VERSION"
 
     echo "Virtual environment created."
 fi
 
 # --------------------------------------------------
-# 4. Activate virtual environment
+# 5. Verify virtual environment
 # --------------------------------------------------
+
+PYTHON="$VENV_DIR/bin/python"
+PIP="$VENV_DIR/bin/pip"
+AIRTUK="$VENV_DIR/bin/airtuk"
 
 echo ""
-echo "Activating virtual environment..."
-
-source "$VENV_DIR"/bin/activate
-
-echo "Active Python:"
-python --version
+echo "Virtual environment Python:"
+"$PYTHON" --version
 
 # --------------------------------------------------
-# 5. Upgrade pip
+# 6. Upgrade pip
 # --------------------------------------------------
 
 echo ""
 echo "Upgrading pip..."
 
-python -m pip install --upgrade pip
+uv pip install \
+    --python "$PYTHON" \
+    --upgrade pip
 
 # --------------------------------------------------
-# 6. Install AIRTUK
+# 7. Install AIRTUK
 # --------------------------------------------------
+
 echo ""
 echo "Installing AIRTUK..."
 
-python -m pip install -e .
+uv pip install \
+    --python "$PYTHON" \
+    -e .
 
 # --------------------------------------------------
-# 6. Install AIRTUK environments and kernels
+# 8. Install AIRTUK environments and kernels
 # --------------------------------------------------
 
 echo ""
@@ -96,6 +137,16 @@ echo "       Setting up AIRTUK environments"
 echo "======================================"
 echo ""
 
-airtuk install
+"$AIRTUK" install
 
+echo ""
+echo "======================================"
+echo "       AIRTUK Installation Complete"
+echo "======================================"
+echo ""
+echo "Python: $("$PYTHON" --version)"
+echo "Environment: $VENV_DIR"
+echo ""
+          
 
+                                                             
