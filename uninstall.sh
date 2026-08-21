@@ -7,6 +7,7 @@ echo "       AIRTUK Uninstallation"
 echo "======================================"
 
 VENV_DIR=".buildenv"
+PYTHON="$VENV_DIR/bin/python"
 
 # --------------------------------------------------
 # 1. Check for virtual environment
@@ -18,28 +19,22 @@ if [ ! -d "$VENV_DIR" ]; then
 else
 
     # --------------------------------------------------
-    # 2. Activate virtual environment
-    # --------------------------------------------------
-
-    echo ""
-    echo "Activating virtual environment..."
-
-    source "$VENV_DIR/bin/activate"
-
-    # --------------------------------------------------
-    # 3. Uninstall AIRTUK Python package
+    # 2. Uninstall AIRTUK Python package
     # --------------------------------------------------
 
     echo ""
     echo "Uninstalling AIRTUK Python package..."
 
-    python -m pip uninstall -y airtuk || true
-
-    deactivate
+    if [ -x "$PYTHON" ]; then
+        "$PYTHON" -m pip uninstall -y airtuk || true
+    else
+        echo "Python executable not found in '$VENV_DIR'."
+        echo "Skipping Python package uninstall."
+    fi
 fi
 
 # --------------------------------------------------
-# 4. Remove AIRTUK package metadata
+# 3. Remove AIRTUK package metadata
 # --------------------------------------------------
 
 echo ""
@@ -48,26 +43,32 @@ echo "Removing AIRTUK build metadata..."
 rm -rf src/airtuk.egg-info
 
 # --------------------------------------------------
-# 5. Remove AIRTUK environments
+# 4. Remove AIRTUK environments
 # --------------------------------------------------
 
 echo ""
 echo "Removing AIRTUK environments..."
 
-rm -rf "$HOME"/.airtuk/envs/airtuk*
+if compgen -G "$HOME/.airtuk/envs/airtuk*" > /dev/null 2>&1; then
+    rm -rf "$HOME"/.airtuk/envs/airtuk*
+    echo "AIRTUK environments removed."
+else
+    echo "No AIRTUK environments found."
+fi
 
 # --------------------------------------------------
-# 6. Remove virtual environment
+# 5. Remove AIRTUK virtual environment
 # --------------------------------------------------
 
 if [ -d "$VENV_DIR" ]; then
     echo ""
     echo "Removing virtual environment '$VENV_DIR'..."
     rm -rf "$VENV_DIR"
+    echo "Virtual environment removed."
 fi
 
 # --------------------------------------------------
-# 7. Done
+# 6. Done
 # --------------------------------------------------
 
 echo ""
