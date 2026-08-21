@@ -35,7 +35,7 @@ cd /path/to/AIRTUK
 Run:
 
 ```bash
-chmod +x install.sh run_airtuk.sh uninstall.sh
+chmod +x *.sh
 ```
 
 > **Note:** `chmod +x` option gives the scripts execute permission.
@@ -222,7 +222,7 @@ For a quick installation, simply run:
 ```bash
 cd /path/to/AIRTUK
 
-chmod +x install.sh run_airtuk.sh uninstall.sh
+chmod +x *.sh
 
 ./install.sh
 ```
