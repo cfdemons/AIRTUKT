@@ -243,7 +243,7 @@ AIRTUK/
     │   ├── *.ipynb
     │   └── ...
     │
-    ├── MFM_BO/
+    ├── MFM_BO_Tutorial/
     │   ├── *.ipynb
     │   └── ...
     │
