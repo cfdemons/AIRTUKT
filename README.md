@@ -16,7 +16,7 @@ The installation script will also install `uv` automatically if it is not alread
 
 ### 1. Download the package and navigate to the AIRTUK directory
 
-Open a terminal and navigate to the directory containing the AIRTUK package:
+Open a terminal and download the AIRTUK packages using `git clone`, then navigate to the directory containing the AIRTUK package:
 
 ```bash
 git clone https://github.com/daniaahmed1/AIRTUK.git
