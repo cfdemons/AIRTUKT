@@ -1,16 +1,16 @@
-# AIRTUK: A Tutorial Collection for Machine Learning in Turbulence
+# AIRTUKT: A Tutorial Collection for Machine Learning in Turbulence
 
-[`AIRTUK`](https://www.ukturbulence.co.uk/ai-hub.html) is a collection of tutorials demonstrating the application of machine learning (ML) and related techniques to turbulence and computational fluid dynamics (CFD). The collection covers four key areas of ML applications in turbulence research: ML-assisted reduced-order and surrogate modelling, including graph neural network-based approaches; ML-based optimisation and uncertainty quantification, including Bayesian optimisation and multi-fidelity shape optimisation; generative modelling for turbulence; and data assimilation using physics-informed neural networks (PINNs) for sparse-data reconstruction.
+AIRTUKT is a collection of tutorials demonstrating the application of machine learning (ML) and related techniques to turbulence and computational fluid dynamics (CFD), as part of [`AIRTUK`](https://www.ukturbulence.co.uk/ai-hub.html). The collection covers four key areas of ML applications in turbulence research: ML-assisted reduced-order and surrogate modelling, including graph neural network-based approaches; ML-based optimisation and uncertainty quantification, including Bayesian optimisation and multi-fidelity shape optimisation; generative modelling for turbulence; and data assimilation using physics-informed neural networks (PINNs) for sparse-data reconstruction.
 
-Each of the five tutorials has a dedicated Jupyter Notebook (`*.ipynb`) located in `AIRTUK/tutorial/$tut_name/*.ipynb`. These notebooks allow users to explore the underlying theory of the algorithms, run the code, and post-process the results.
+Each of the five tutorials has a dedicated Jupyter Notebook (`*.ipynb`) located in `AIRTUKT/tutorial/$tut_name/*.ipynb`. These notebooks allow users to explore the underlying theory of the algorithms, run the code, and post-process the results.
 
 
 
 ## Requirements
 
-AIRTUK requires a Linux operating system (tested mainly on [`Ubuntu`](https://ubuntu.com/desktop)) and **Python 3.10**.
+AIRTUKT requires a Linux operating system (tested mainly on [`Ubuntu`](https://ubuntu.com/desktop)) and **Python 3.10**.
 
-You do **not** need to install Python 3.10 manually. The AIRTUK installation script uses [`uv`](https://docs.astral.sh/uv/) to automatically install and manage the required Python 3.10 interpreter.
+You do **not** need to install Python 3.10 manually. The AIRTUKTT installation script uses [`uv`](https://docs.astral.sh/uv/) to automatically install and manage the required Python 3.10 interpreter.
 
 The installation script will also install `uv` automatically if it is not already available on your system.
 
@@ -26,13 +26,13 @@ sudo apt-get install openfoam2312-default -y
 
 ## Installation
 
-### 1. Download the package and navigate to the AIRTUK directory
+### 1. Download the package and navigate to the AIRTUKT directory
 
-Open a terminal and download the AIRTUK packages using `git clone`, then navigate to the directory containing the AIRTUK package:
+Open a terminal and download the AIRTUKT packages using `git clone`, then navigate to the directory containing the AIRTUKT package:
 
 ```bash
-git clone https://github.com/daniaahmed1/AIRTUK.git
-cd AIRTUK
+git clone https://github.com/daniaahmed1/AIRTUKT.git
+cd AIRTUKT
 ```
 
 ### 2. Make the scripts executable
@@ -45,7 +45,7 @@ chmod u+x *.sh
 
 > **Note:** `chmod u+x` gives the scripts execute permission.
 
-### 3. Install AIRTUK
+### 3. Install AIRTUKT
 
 Run:
 
@@ -60,11 +60,11 @@ The installation script will automatically:
 3. Install Python 3.10 using `uv`.
 4. Create a Python 3.10 virtual environment called `.buildenv`.
 5. Install and upgrade the required Python packaging tools.
-6. Install the AIRTUK package into `.buildenv`.
-7. Run `airtuk install`.
-8. Create the AIRTUK and AIRTUK2 environments.
+6. Install the AIRTUKT package into `.buildenv`.
+7. Run `AIRTUKT install`.
+8. Create the AIRTUKT and AIRTUKT2 environments.
 9. Install the required Python packages for each environment.
-10. Register the AIRTUK and AIRTUK2 Jupyter kernels.
+10. Register the AIRTUKT and AIRTUKT2 Jupyter kernels.
 
 The installation process is structured as follows:
 
@@ -79,28 +79,28 @@ The installation process is structured as follows:
      │
      ├── Create .buildenv using Python 3.10
      │
-     ├── Install AIRTUK into .buildenv
+     ├── Install AIRTUKT into .buildenv
      │
-     └── Run "airtuk install"
+     └── Run "AIRTUKT install"
               │
-              ├── Create ~/.airtuk/envs/airtuk
-              │       └── Install airtuk_requirements.txt
+              ├── Create ~/.AIRTUKT/envs/AIRTUKT
+              │       └── Install AIRTUKT_requirements.txt
               │
-              ├── Create ~/.airtuk/envs/airtuk2
-              │       └── Install airtuk2_requirements.txt
+              ├── Create ~/.AIRTUKT/envs/AIRTUKT2
+              │       └── Install AIRTUKT2_requirements.txt
               │
-              ├── Register "AIRTUK" kernel
-              │       └── Uses ~/.airtuk/envs/airtuk/bin/python
+              ├── Register "AIRTUKT" kernel
+              │       └── Uses ~/.AIRTUKT/envs/AIRTUKT/bin/python
               │
-              └── Register "AIRTUK2" kernel
-                      └── Uses ~/.airtuk/envs/airtuk2/bin/python
+              └── Register "AIRTUKT2" kernel
+                      └── Uses ~/.AIRTUKT/envs/AIRTUKT2/bin/python
 ```
 
 ### Python 3.10
 
 Python 3.10 is managed by `uv` and does not need to be installed system-wide.
 
-The Python interpreter used by AIRTUK is located inside the `.buildenv` environment:
+The Python interpreter used by AIRTUKT is located inside the `.buildenv` environment:
 
 ```text
 .buildenv/bin/python
@@ -128,25 +128,25 @@ uv --version
 
 ## Launching the Tutorials
 
-After the installation has completed, launch the AIRTUK tutorials using:
+After the installation has completed, launch the AIRTUKT tutorials using:
 
 ```bash
-./run_airtuk.sh
+./run_AIRTUKT.sh
 ```
 
-The launch script uses the AIRTUK Python environment directly and does not require you to manually activate the virtual environment.
+The launch script uses the AIRTUKT Python environment directly and does not require you to manually activate the virtual environment.
 
-It will launch Jupyter and provide access to the AIRTUK tutorials.
+It will launch Jupyter and provide access to the AIRTUKT tutorials.
 
 The basic workflow is therefore:
 
 ```text
 ./install.sh
       │
-      └── Install AIRTUK
+      └── Install AIRTUKT
               │
               ▼
-       ./run_airtuk.sh
+       ./run_AIRTUKT.sh
               │
               ▼
        Launch Jupyter
@@ -154,9 +154,9 @@ The basic workflow is therefore:
 
 ---
 
-## Uninstall AIRTUK
+## Uninstall AIRTUKT
 
-To uninstall AIRTUK, run:
+To uninstall AIRTUKT, run:
 
 ```bash
 ./uninstall.sh
@@ -164,9 +164,9 @@ To uninstall AIRTUK, run:
 
 The uninstall script will remove:
 
-* The AIRTUK Python package.
-* AIRTUK build metadata.
-* The AIRTUK environments.
+* The AIRTUKT Python package.
+* AIRTUKT build metadata.
+* The AIRTUKT environments.
 * The `.buildenv` virtual environment.
 
 The `uv` installation and its managed Python versions are **not removed**, because they may be used by other projects on the system.
@@ -175,70 +175,70 @@ If you want to remove `uv` or its managed Python versions separately, consult th
 
 ---
 
-## AIRTUK Environments
+## AIRTUKT Environments
 
-AIRTUK uses two separate Python environments because different tutorials require different sets of dependencies.
+AIRTUKT uses two separate Python environments because different tutorials require different sets of dependencies.
 
 ```text
-                         AIRTUK
+                         AIRTUKT
                         Installer
                            │
               ┌────────────┴────────────┐
               │                         │
               ▼                         ▼
-      AIRTUK environment        AIRTUK2 environment
+      AIRTUKT environment        AIRTUKT2 environment
               │                         │
-        Kernel: airtuk             Kernel: airtuk2
+        Kernel: AIRTUKT             Kernel: AIRTUKT2
               │                         │
               │                         │
        All tutorials             MFM_BO tutorial
         except MFM_BO
 ```
 
-### AIRTUK environment
+### AIRTUKT environment
 
-The `airtuk` environment is used by all tutorials except the multi-fidelity Bayesian optimisation tutorial.
+The `AIRTUKT` environment is used by all tutorials except the multi-fidelity Bayesian optimisation tutorial.
 
 The corresponding Jupyter kernel is:
 
 ```text
-AIRTUK
-kernel: airtuk
+AIRTUKT
+kernel: AIRTUKT
 ```
 
-### AIRTUK2 environment
+### AIRTUKT2 environment
 
-The `airtuk2` environment is specifically used by the `MFM_BO` tutorial.
+The `AIRTUKT2` environment is specifically used by the `MFM_BO` tutorial.
 
 The corresponding Jupyter kernel is:
 
 ```text
-AIRTUK2
-kernel: airtuk2
+AIRTUKT2
+kernel: AIRTUKT2
 ```
 
 ---
 
 ## Package Structure
 
-The AIRTUK package has the following structure:
+The AIRTUKT package has the following structure:
 
 ```text
-AIRTUK/
+AIRTUKT/
 │
 ├── pyproject.toml
 ├── README.md
 ├── LICENSE
 ├── install.sh
 ├── uninstall.sh
-├── run_airtuk.sh
+├── run_AIRTUKT.sh
 │
 ├── requirements/
-│   ├── airtuk_requirements.txt
-│   └── airtuk2_requirements.txt
+│   ├── AIRTUKT_requirements.txt
+│   └── AIRTUKT2_requirements.txt
 │
 ├── src/
-│   └── airtuk/
+│   └── AIRTUKT/
 │       ├── __init__.py
 │       ├── cli.py
 │       ├── environments.py
@@ -275,21 +275,21 @@ AIRTUK/
 For a quick installation, simply run:
 
 ```bash
-cd /path/to/AIRTUK
+cd /path/to/AIRTUKT
 
 chmod u+x *.sh
 
 ./install.sh
 ```
 
-The installer will automatically install `uv`, obtain Python 3.10, create the AIRTUK environment, install the required packages, and register the Jupyter kernels.
+The installer will automatically install `uv`, obtain Python 3.10, create the AIRTUKT environment, install the required packages, and register the Jupyter kernels.
 
 Once the installation is complete, launch the tutorials with:
 
 ```bash
-./run_airtuk.sh
+./run_AIRTUKT.sh
 ```
 
-That's it! AIRTUK will manage the required Python 3.10 environment and create the required AIRTUK environments and Jupyter kernels automatically.
+That's it! AIRTUKT will manage the required Python 3.10 environment and create the required AIRTUKT environments and Jupyter kernels automatically.
 
 
