@@ -3,14 +3,14 @@ import subprocess
 import sys
 
 
-# AIRTUK installation directory
-AIRTUK_HOME = Path.home() / ".airtuk"
+# AIRTUKT installation directory
+AIRTUKT_HOME = Path.home() / ".AIRTUKT"
 
 
 # Virtual environments
 ENVIRONMENTS = {
-    "airtuk": AIRTUK_HOME / "envs" / "airtuk",
-    "airtuk2": AIRTUK_HOME / "envs" / "airtuk2",
+    "AIRTUKT": AIRTUKT_HOME / "envs" / "AIRTUKT",
+    "AIRTUKT2": AIRTUKT_HOME / "envs" / "AIRTUKT2",
 }
 
 
@@ -18,8 +18,8 @@ ENVIRONMENTS = {
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 
 REQUIREMENTS = {
-    "airtuk": PACKAGE_ROOT / "requirements" / "airtuk_requirements.txt",
-    "airtuk2": PACKAGE_ROOT / "requirements" / "airtuk2_requirements.txt",
+    "AIRTUKT": PACKAGE_ROOT / "requirements" / "AIRTUKT_requirements.txt",
+    "AIRTUKT2": PACKAGE_ROOT / "requirements" / "AIRTUKT2_requirements.txt",
 }
 
 
@@ -52,7 +52,7 @@ def create_environment(name):
 
 
 def get_python_executable(name):
-    """Return the Python executable for an AIRTUK environment."""
+    """Return the Python executable for an AIRTUKT environment."""
 
     env_path = ENVIRONMENTS[name]
 
@@ -63,7 +63,7 @@ def get_python_executable(name):
 
 
 def install_requirements(name):
-    """Install the requirements for an AIRTUK environment."""
+    """Install the requirements for an AIRTUKT environment."""
 
     if name not in REQUIREMENTS:
         raise ValueError(f"Unknown environment: {name}")
@@ -118,7 +118,7 @@ def install_requirements(name):
     )
 
     # Install PyTorch Geometric CUDA extensions
-    if name == "airtuk":
+    if name == "AIRTUKT":
         print("\nInstalling PyTorch Geometric CUDA extensions...")
 
         subprocess.run(
@@ -142,16 +142,16 @@ def install_requirements(name):
 
 
 def setup_environments():
-    """Create and configure both AIRTUK environments."""
+    """Create and configure both AIRTUKT environments."""
 
-    print("\n=== Setting up AIRTUK environments ===\n")
+    print("\n=== Setting up AIRTUKT environments ===\n")
 
-    airtuk_python = install_requirements("airtuk")
-    airtuk2_python = install_requirements("airtuk2")
+    AIRTUKT_python = install_requirements("AIRTUKT")
+    AIRTUKT2_python = install_requirements("AIRTUKT2")
 
     print("\n=== Environment setup complete ===\n")
 
     return {
-        "airtuk": airtuk_python,
-        "airtuk2": airtuk2_python,
+        "AIRTUKT": AIRTUKT_python,
+        "AIRTUKT2": AIRTUKT2_python,
     }
