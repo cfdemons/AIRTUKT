@@ -21,17 +21,17 @@ def install_kernel(kernel_name, display_name, python_executable):
     )
 
 
-def install_kernels(airtuk_python, airtuk2_python):
-    """Install both AIRTUK Jupyter kernels."""
+def install_kernels(airtukt_python, airtukt2_python):
+    """Install both AIRTUKT Jupyter kernels."""
 
     install_kernel(
-        kernel_name="airtuk",
-        display_name="AIRTUK",
+        kernel_name="airtukt",
+        display_name="AIRTUKT",
         python_executable=airtuk_python,
     )
 
     install_kernel(
-        kernel_name="airtuk2",
-        display_name="AIRTUK2",
+        kernel_name="airtukt2",
+        display_name="AIRTUKT2",
         python_executable=airtuk2_python,
     )
