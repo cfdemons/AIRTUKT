@@ -3,7 +3,7 @@ import subprocess
 
 
 def launch_notebooks(notebook_dir=None):
-    """Launch JupyterLab with the AIRTUK tutorials."""
+    """Launch JupyterLab with the AIRTUKT tutorials."""
 
     if notebook_dir is None:
         notebook_dir = Path.cwd()
