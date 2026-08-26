@@ -4,15 +4,15 @@ set -e
 
 VENV_DIR=".buildenv"
 PYTHON="$VENV_DIR/bin/python"
-AIRTUK="$VENV_DIR/bin/airtuk"
+AIRTUKT="$VENV_DIR/bin/airtukt"
 
 # --------------------------------------------------
-# 1. Check AIRTUK environment
+# 1. Check AIRTUKT environment
 # --------------------------------------------------
 
-if [ ! -x "$PYTHON" ] || [ ! -x "$AIRTUK" ]; then
+if [ ! -x "$PYTHON" ] || [ ! -x "$AIRTUKT" ]; then
     echo ""
-    echo "ERROR: AIRTUK environment was not found."
+    echo "ERROR: AIRTUKT environment was not found."
     echo ""
     echo "Please run:"
     echo ""
@@ -26,17 +26,17 @@ fi
 # --------------------------------------------------
 
 echo ""
-echo "AIRTUK Python:"
+echo "AIRTUKT Python:"
 "$PYTHON" --version
 
 # --------------------------------------------------
-# 3. Launch AIRTUK
+# 3. Launch AIRTUKT
 # --------------------------------------------------
 
 echo ""
 echo "======================================"
-echo "       Launching AIRTUK"
+echo "       Launching AIRTUKT"
 echo "======================================"
 echo ""
 
-exec "$AIRTUK" notebook
+exec "$AIRTUKT" notebook
