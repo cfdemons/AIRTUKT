@@ -16,11 +16,13 @@ The installation script will also install `uv` automatically if it is not alread
 
 MFM_BO tutorial requires [`OpenFOAM2312`](https://www.openfoam.com/news/main-news/openfoam-v2312) or above, which can be installed used the following:
 
+```bash
 sudo curl -s https://openfoam.com | sudo bash
 
 sudo apt-get update
 
 sudo apt-get install openfoam2312-default -y
+```
 
 ---
 
