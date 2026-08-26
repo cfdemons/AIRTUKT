@@ -3,7 +3,7 @@
 set -e
 
 echo "======================================"
-echo "       AIRTUK Installation"
+echo "       AIRTUKT Installation"
 echo "======================================"
 
 # --------------------------------------------------
@@ -14,22 +14,22 @@ VENV_DIR=".buildenv"
 PYTHON_VERSION="3.10"
 
 # --------------------------------------------------
-# 1. Clean previous AIRTUK installation (if any)
+# 1. Clean previous AIRTUKT installation (if any)
 # --------------------------------------------------
 
 echo ""
-echo "Checking for previous AIRTUK installation..."
+echo "Checking for previous AIRTUKT installation..."
 
 if [ -d "$VENV_DIR" ] || \
-   [ -d "src/airtuk.egg-info" ] || \
-   compgen -G "$HOME/.airtuk/envs/airtuk*" > /dev/null 2>&1; then
+   [ -d "src/airtukt.egg-info" ] || \
+   compgen -G "$HOME/.airtukt/envs/airtukt*" > /dev/null 2>&1; then
 
-    echo "Previous AIRTUK installation found."
+    echo "Previous AIRTUKT installation found."
     echo "Running uninstall.sh..."
 
     ./uninstall.sh
 else
-    echo "No previous AIRTUK installation found."
+    echo "No previous AIRTUKT installation found."
 fi
 
 # --------------------------------------------------
@@ -99,7 +99,7 @@ fi
 
 PYTHON="$VENV_DIR/bin/python"
 PIP="$VENV_DIR/bin/pip"
-AIRTUK="$VENV_DIR/bin/airtuk"
+AIRTUKT="$VENV_DIR/bin/airtukt"
 
 echo ""
 echo "Virtual environment Python:"
@@ -117,31 +117,31 @@ uv pip install \
     --upgrade pip
 
 # --------------------------------------------------
-# 7. Install AIRTUK
+# 7. Install AIRTUKT
 # --------------------------------------------------
 
 echo ""
-echo "Installing AIRTUK..."
+echo "Installing AIRTUKT..."
 
 uv pip install \
     --python "$PYTHON" \
     -e .
 
 # --------------------------------------------------
-# 8. Install AIRTUK environments and kernels
+# 8. Install AIRTUKT environments and kernels
 # --------------------------------------------------
 
 echo ""
 echo "======================================"
-echo "       Setting up AIRTUK environments"
+echo "       Setting up AIRTUKT environments"
 echo "======================================"
 echo ""
 
-"$AIRTUK" install
+"$AIRTUKT" install
 
 echo ""
 echo "======================================"
-echo "       AIRTUK Installation Complete"
+echo "       AIRTUKT Installation Complete"
 echo "======================================"
 echo ""
 echo "Python: $("$PYTHON" --version)"
