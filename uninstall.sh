@@ -3,7 +3,7 @@
 set -e
 
 echo "======================================"
-echo "       AIRTUK Uninstallation"
+echo "       AIRTUKT Uninstallation"
 echo "======================================"
 
 VENV_DIR=".buildenv"
@@ -19,14 +19,14 @@ if [ ! -d "$VENV_DIR" ]; then
 else
 
     # --------------------------------------------------
-    # 2. Uninstall AIRTUK Python package
+    # 2. Uninstall AIRTUKT Python package
     # --------------------------------------------------
 
     echo ""
-    echo "Uninstalling AIRTUK Python package..."
+    echo "Uninstalling AIRTUKT Python package..."
 
     if [ -x "$PYTHON" ]; then
-        "$PYTHON" -m pip uninstall -y airtuk || true
+        "$PYTHON" -m pip uninstall -y airtukt || true
     else
         echo "Python executable not found in '$VENV_DIR'."
         echo "Skipping Python package uninstall."
@@ -34,30 +34,30 @@ else
 fi
 
 # --------------------------------------------------
-# 3. Remove AIRTUK package metadata
+# 3. Remove AIRTUKT package metadata
 # --------------------------------------------------
 
 echo ""
-echo "Removing AIRTUK build metadata..."
+echo "Removing AIRTUKT build metadata..."
 
-rm -rf src/airtuk.egg-info
+rm -rf src/airtukt.egg-info
 
 # --------------------------------------------------
-# 4. Remove AIRTUK environments
+# 4. Remove AIRTUKT environments
 # --------------------------------------------------
 
 echo ""
-echo "Removing AIRTUK environments..."
+echo "Removing AIRTUKT environments..."
 
-if compgen -G "$HOME/.airtuk/envs/airtuk*" > /dev/null 2>&1; then
-    rm -rf "$HOME"/.airtuk/envs/airtuk*
-    echo "AIRTUK environments removed."
+if compgen -G "$HOME/.airtukt/envs/airtukt*" > /dev/null 2>&1; then
+    rm -rf "$HOME"/.airtukt/envs/airtukt*
+    echo "AIRTUKT environments removed."
 else
-    echo "No AIRTUK environments found."
+    echo "No AIRTUKT environments found."
 fi
 
 # --------------------------------------------------
-# 5. Remove AIRTUK virtual environment
+# 5. Remove AIRTUKT virtual environment
 # --------------------------------------------------
 
 if [ -d "$VENV_DIR" ]; then
@@ -73,6 +73,6 @@ fi
 
 echo ""
 echo "======================================"
-echo "       AIRTUK Uninstallation Complete"
+echo "       AIRTUKT Uninstallation Complete"
 echo "======================================"
 echo ""
