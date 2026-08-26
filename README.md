@@ -1,6 +1,6 @@
 # AIRTUK: A Tutorial Collection for Machine Learning in Turbulence
 
-AIRTUK is a collection of tutorials demonstrating the application of machine learning (ML) and related techniques to turbulence and computational fluid dynamics (CFD). The collection covers four key areas of ML applications in turbulence research: ML-assisted reduced-order and surrogate modelling, including graph neural network-based approaches; ML-based optimisation and uncertainty quantification, including Bayesian optimisation and multi-fidelity shape optimisation; generative modelling for turbulence; and data assimilation using physics-informed neural networks (PINNs) for sparse-data reconstruction.
+[`AIRTUK`](https://www.ukturbulence.co.uk/ai-hub.html) is a collection of tutorials demonstrating the application of machine learning (ML) and related techniques to turbulence and computational fluid dynamics (CFD). The collection covers four key areas of ML applications in turbulence research: ML-assisted reduced-order and surrogate modelling, including graph neural network-based approaches; ML-based optimisation and uncertainty quantification, including Bayesian optimisation and multi-fidelity shape optimisation; generative modelling for turbulence; and data assimilation using physics-informed neural networks (PINNs) for sparse-data reconstruction.
 
 Each of the five tutorials has a dedicated Jupyter Notebook (`*.ipynb`) located in `AIRTUK/tutorial/$tut_name/*.ipynb`. These notebooks allow users to explore the underlying theory of the algorithms, run the code, and post-process the results.
 
@@ -8,7 +8,7 @@ Each of the five tutorials has a dedicated Jupyter Notebook (`*.ipynb`) located 
 
 ## Requirements
 
-AIRTUK requires **Python 3.10**.
+AIRTUK requires a Linux operating system (tested mainly on [`Ubuntu`](https://ubuntu.com/desktop)) and **Python 3.10**.
 
 You do **not** need to install Python 3.10 manually. The AIRTUK installation script uses [`uv`](https://docs.astral.sh/uv/) to automatically install and manage the required Python 3.10 interpreter.
 
@@ -40,10 +40,10 @@ cd AIRTUK
 Run:
 
 ```bash
-chmod +x *.sh
+chmod u+x *.sh
 ```
 
-> **Note:** `chmod +x` gives the scripts execute permission.
+> **Note:** `chmod u+x` gives the scripts execute permission.
 
 ### 3. Install AIRTUK
 
@@ -277,7 +277,7 @@ For a quick installation, simply run:
 ```bash
 cd /path/to/AIRTUK
 
-chmod +x *.sh
+chmod u+x *.sh
 
 ./install.sh
 ```
