@@ -18,9 +18,7 @@ MFM_BO tutorial requires [`OpenFOAM2312`](https://www.openfoam.com/news/main-new
 
 ```bash
 sudo curl -s https://openfoam.com | sudo bash
-
 sudo apt-get update
-
 sudo apt-get install openfoam2312-default -y
 ```
 
