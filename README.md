@@ -14,6 +14,14 @@ You do **not** need to install Python 3.10 manually. The AIRTUK installation scr
 
 The installation script will also install `uv` automatically if it is not already available on your system.
 
+MFM_BO tutorial requires [`OpenFOAM2312`](https://www.openfoam.com/news/main-news/openfoam-v2312) or above, which can be installed used the following:
+
+sudo curl -s https://openfoam.com | sudo bash
+
+sudo apt-get update
+
+sudo apt-get install openfoam2312-default -y
+
 ---
 
 ## Installation
