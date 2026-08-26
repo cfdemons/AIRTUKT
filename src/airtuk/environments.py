@@ -4,13 +4,13 @@ import sys
 
 
 # AIRTUKT installation directory
-AIRTUKT_HOME = Path.home() / ".AIRTUKT"
+AIRTUKT_HOME = Path.home() / ".airtukt"
 
 
 # Virtual environments
 ENVIRONMENTS = {
-    "AIRTUKT": AIRTUKT_HOME / "envs" / "AIRTUKT",
-    "AIRTUKT2": AIRTUKT_HOME / "envs" / "AIRTUKT2",
+    "airtukt": AIRTUKT_HOME / "envs" / "airtukt",
+    "airtukt2": AIRTUKT_HOME / "envs" / "airtukt2",
 }
 
 
@@ -18,8 +18,8 @@ ENVIRONMENTS = {
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 
 REQUIREMENTS = {
-    "AIRTUKT": PACKAGE_ROOT / "requirements" / "AIRTUKT_requirements.txt",
-    "AIRTUKT2": PACKAGE_ROOT / "requirements" / "AIRTUKT2_requirements.txt",
+    "airtukt": PACKAGE_ROOT / "requirements" / "airtukt_requirements.txt",
+    "airtukt2": PACKAGE_ROOT / "requirements" / "airtukt2_requirements.txt",
 }
 
 
@@ -118,7 +118,7 @@ def install_requirements(name):
     )
 
     # Install PyTorch Geometric CUDA extensions
-    if name == "AIRTUKT":
+    if name == "airtukt":
         print("\nInstalling PyTorch Geometric CUDA extensions...")
 
         subprocess.run(
@@ -146,12 +146,12 @@ def setup_environments():
 
     print("\n=== Setting up AIRTUKT environments ===\n")
 
-    AIRTUKT_python = install_requirements("AIRTUKT")
-    AIRTUKT2_python = install_requirements("AIRTUKT2")
+    airtukt_python = install_requirements("airtukt")
+    airtukt2_python = install_requirements("airtukt2")
 
     print("\n=== Environment setup complete ===\n")
 
     return {
-        "AIRTUKT": AIRTUKT_python,
-        "AIRTUKT2": AIRTUKT2_python,
+        "airtukt": airtukt_python,
+        "airtukt2": airtukt2_python,
     }
