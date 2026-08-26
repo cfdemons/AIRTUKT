@@ -7,7 +7,7 @@ from .launcher import launch_notebooks
 
 def main():
     parser = argparse.ArgumentParser(
-        description="AIRTUK: ML tutorials for turbulence research"
+        description="AIRTUKT: ML tutorials for turbulence research"
     )
 
     subparsers = parser.add_subparsers(dest="command")
@@ -15,13 +15,13 @@ def main():
     # Install command
     install_parser = subparsers.add_parser(
         "install",
-        help="Install the AIRTUK environments and Jupyter kernels",
+        help="Install the AIRTUKT environments and Jupyter kernels",
     )
 
     # Notebook command
     notebook_parser = subparsers.add_parser(
         "notebook",
-        help="Launch the AIRTUK tutorials in JupyterLab",
+        help="Launch the AIRTUKT tutorials in JupyterLab",
     )
 
     args = parser.parse_args()
@@ -29,23 +29,23 @@ def main():
     if args.command == "install":
 
         print("\n===================================")
-        print("       Installing AIRTUK")
+        print("       Installing AIRTUKT")
         print("===================================\n")
 
         # Create environments and install requirements
         python_executables = setup_environments()
 
-        airtuk_python = python_executables["airtuk"]
-        airtuk2_python = python_executables["airtuk2"]
+        AIRTUKT_python = python_executables["AIRTUKT"]
+        AIRTUKT2_python = python_executables["AIRTUKT2"]
 
         # Install both Jupyter kernels
         install_kernels(
-            airtuk_python,
-            airtuk2_python,
+            AIRTUKT_python,
+            AIRTUKT2_python,
         )
 
         print("\n===================================")
-        print("       AIRTUK installation complete")
+        print("       AIRTUKT installation complete")
         print("===================================\n")
 
     elif args.command == "notebook":
