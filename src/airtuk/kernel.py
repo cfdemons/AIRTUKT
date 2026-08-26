@@ -27,11 +27,11 @@ def install_kernels(airtukt_python, airtukt2_python):
     install_kernel(
         kernel_name="airtukt",
         display_name="AIRTUKT",
-        python_executable=airtuk_python,
+        python_executable=airtukt_python,
     )
 
     install_kernel(
         kernel_name="airtukt2",
         display_name="AIRTUKT2",
-        python_executable=airtuk2_python,
+        python_executable=airtukt2_python,
     )
