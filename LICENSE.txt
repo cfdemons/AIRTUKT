@@ -3,8 +3,6 @@ Copyright (C) 2026, University of Manchester, all rights reserved.
 Authors: Dania Ahmed, Archie Dobson, Andrew Mole, Aan Yudianto, Mohammed Sardar, Gabriel Colenso, Sylvain Laizet, Julia
 Handl, and Alistair Revell , University of Manchester, dania.ahmed@manchester.ac.uk 
 
-This software is provided “as is” and is intended solely for academic and research purposes. No express or implied warranties are provided, including, without
-limitation, any implied warranties of merchantability, quality, or fitness for a particular purpose. In no event shall the copyright holders or contributors be
-liable for any direct, indirect, incidental, special, exemplary, or consequential damages, including, without limitation, the procurement of substitute goods or
-services, loss of use, loss of data, loss of profits, or business interruption, arising out of or in connection with the use of this software, regardless of the 
-form or basis of liability, whether in contract, strict liability, tort, negligence, or otherwise, even if they have been advised of the possibility of such damages.
+This open-source software is provided “as is” and is intended for academic, research, and educational purposes. The source code is made publicly available to encourage transparency, reproducibility, collaboration, and further research. No express or implied warranties are provided, including, without limitation, any warranties of merchantability, quality, reliability, or fitness for a particular purpose.
+In no event shall the copyright holders or contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages, including, without limitation, the cost of substitute goods or services, loss of use, loss of data, loss of profits, or business interruption, arising out of or in connection with the use, modification, distribution, or reproduction of this open-source software, regardless of the form or basis of liability, whether in contract, strict liability, tort, negligence, or otherwise, even if they have been advised of the possibility of such damages.
+Users are free to inspect, use, modify, and contribute to the code in accordance with the terms of the applicable open-source license accompanying this software.
