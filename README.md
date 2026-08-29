@@ -126,7 +126,7 @@ uv --version
 
 ---
 
-## Launching the Tutorials
+## 4. Launching the Tutorials
 
 After the installation has completed, launch the AIRTUKT tutorials using:
 
@@ -154,7 +154,7 @@ The basic workflow is therefore:
 
 ---
 
-## Uninstall AIRTUKT
+## 5. Uninstall AIRTUKT
 
 To uninstall AIRTUKT, run:
 
